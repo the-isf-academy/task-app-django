@@ -1,0 +1,74 @@
+/* #task-card{
+    width: 25%;
+    color: blue;
+} */
+
+#navbar-custon{
+    background-color:rgb(73, 128, 90);
+    text-align: center;
+}
+
+body{
+    color: rgb(36, 36, 36);
+    background-color: rgb(240, 240, 240);
+}
+
+nav{
+    margin-bottom: 50px;
+}
+
+#task-card-container{
+    width: 250px;
+    margin-bottom: 50px;
+    /* border-color:  rgb(105, 135, 114); */
+    border-radius: 10px;
+    border-width: 2px;
+    /* filter: drop-shadow(0 0 0.05rem #505050); */
+}
+
+#task-card-container span{
+    font-weight: bold;
+}
+
+
+#form-card{
+    width: 500px;
+    /* background-color:  rgb(105, 135, 114); */
+    border-color:  rgb(105, 135, 114);
+    border-radius: 10px;
+    border-width: 3px;
+    /* color:white; */
+    filter: drop-shadow(0 0 0.1rem #505050);
+
+}
+
+#form-container{
+    width:300px;
+    
+}
+
+#form-card h4{
+    text-align: center;
+}
+
+
+#form-container button, #task-card-container button{
+    background-color: rgb(73, 128, 90);
+    border-color: rgb(73, 128, 90);
+
+}
+
+#form-container button:hover, #task-card-container button:hover{
+    background-color: rgb(52, 91, 64);
+    border-color: rgb(52, 91, 64);
+}
+
+#task-card-container a{
+    color: rgb(73, 128, 90);
+}
+
+
+ #task-card-container a:hover{
+    text-decoration: none;;
+    color: rgb(40, 74, 51);
+}

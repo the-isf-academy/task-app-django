@@ -1,0 +1,22 @@
+{% extends "task/base.html" %}
+
+{% block content %}
+
+<div class ="d-flex justify-content-center">
+<div class="card" id="form-card">
+    <div class="card-body">
+      <h4 class="card-title">{{ task }}</h4>
+      
+        <!-- <div class="container"> -->
+          <p><span style="font-weight: bold;">Label: </span>{{ task.label }}</p>
+          <p><span style="font-weight: bold;">Notes: </span>{{ task.notes }}</p>
+          <p><span style="font-weight: bold;">Due Date: </span>{{ task.due_date }}</p>
+
+        <!-- </div> -->
+    </div>
+  </div>
+</div>
+
+    
+{% endblock %}
+

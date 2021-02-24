@@ -1,0 +1,26 @@
+{% extends "task/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class ="d-flex justify-content-center">
+<div class="card" id="form-card">
+    <div class="card-body">
+      <h4 class="card-title">{{ task.label }}</h4>
+      
+        <div class="container" id="form-container">
+        <form method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+        
+            <button type="submit" class="btn btn-primary">Save</button>
+        
+        </form>
+        </div>
+    </div>
+  </div>
+</div>
+
+    
+{% endblock %}
+

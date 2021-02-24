@@ -1,0 +1,41 @@
+{% extends "task/base.html" %}
+
+
+{% block content %}
+
+
+
+<div class="container" style="width:75%">
+  <ul class="list-group">
+    {% for task in tasks %}
+  
+    <ul class="list-group">
+      <li class="list-group-item">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">{{ task }}</h5>
+          <small><span style="font-weight: bold;">Date Due: </span> {{ task.due_date }}</small>
+        </div>
+        <p style="font-style: italic;">Label: {{ task.label }}</p>
+        <p>Notes: {{task.notes}}</p>
+        <a href="{% url 'update-task' pk=task.id %}"><span class="badge badge-dark badge-pill">Update</span></a>
+  
+      </li>
+      
+    </ul>
+    {% endfor %} 
+
+
+
+  
+
+</ul>
+
+</div>
+
+
+
+
+{% endblock %}
+
+
+

@@ -1,0 +1,25 @@
+{% extends "task/base.html" %}
+
+
+{% block content %}
+
+<div class ="d-flex flex-row">
+<div class="p-2">
+<ul class="list-group">
+    {% for task in tasks %}
+
+    <li class="list-group-item"> {{ task }} </li>
+
+    {% endfor %}
+
+      
+</ul>
+
+</div>
+</div>
+
+
+{% endblock %}
+
+
+
