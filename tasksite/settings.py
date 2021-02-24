@@ -130,3 +130,5 @@ STATIC_URL = '/static/'
 #Change Login Redirect URL
 
 LOGIN_REDIRECT_URL = "task-list"
+LOGOUT_REDIRECT_URL = '/' # new
+

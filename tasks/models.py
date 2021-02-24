@@ -3,10 +3,12 @@ import datetime
 from django.db import models
 from django.utils import timezone
 from django.utils.timezone import now
-from django.contrib.auth.models import User,Group
+from django.contrib.auth.models import User # new
 # Create your models here.
 
 class Task(models.Model):
+    task_user = models.ForeignKey(User, on_delete=models.CASCADE, default=1) # new
+
     title =  models.CharField(max_length=30)
     label =  models.CharField(max_length=8)
     notes = models.TextField(editable=True)
