@@ -27,7 +27,9 @@
     {% endfor %} 
 </ul>
 
-{% include 'task/pagination.html' %}
+{% if task in tasks %}
+  {% include 'task/pagination.html' %}
+{% endif %}
 
 
 </div>

@@ -4,28 +4,31 @@ from django.views import View
 from django.views.generic import ListView, FormView, UpdateView, TemplateView
 from django.views.generic.detail import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import login, authenticate
 
 
 from .models import *
-from .forms import TaskForm
+from .forms import TaskForm, CreateAccountForm
 
 class WelcomeView(TemplateView):
     template_name = 'task/welcomeView.html'
 
-# class CreateAccount(FormView):
-#     template_name = 'task/createAccount.html'
-#     success_url = '/home'
+class CreateAccountView(FormView):
+    template_name = 'task/createAccount.html'
+    form_class = CreateAccountForm
+
+    success_url = '/home'
 
 
-#     def form_valid(self, form):
-#         # This method is called when valid form data has been POSTed.
-#         # It should return an HttpResponse.
-#         form.save()
-#         username = form.cleaned_data.get('username')
-#         raw_password = form.cleaned_data.get('password1')
-#         user = authenticate(username=username, password=raw_password)
-#         login(request, user)
-#         return redirect('home')
+    def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
+        form.save()
+        username = form.cleaned_data.get('username')
+        raw_password = form.cleaned_data.get('password1')
+        user = authenticate(username=username, password=raw_password)
+        login(self.request, user)
+        return super().form_valid(form)
 
 class TaskList(ListView):
 
