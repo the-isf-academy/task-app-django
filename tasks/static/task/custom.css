@@ -32,6 +32,7 @@ nav{
 
 
 #form-card{
+    margin-bottom: 50px;
     width: 500px;
     /* background-color:  rgb(105, 135, 114); */
     border-color:  rgb(105, 135, 114);
@@ -71,4 +72,8 @@ nav{
  #task-card-container a:hover{
     text-decoration: none;;
     color: rgb(40, 74, 51);
+}
+
+.badge-pill{
+    background-color:  rgb(40, 74, 51);
 }

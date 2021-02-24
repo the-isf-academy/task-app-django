@@ -1,4 +1,4 @@
-{% extends "task/base.html" %}
+{% extends "base.html" %}
 
 
 {% block content %}
@@ -15,22 +15,24 @@
           <h5 class="mb-1">{{ task }}</h5>
           <small><span style="font-weight: bold;">Date Due: </span> {{ task.due_date }}</small>
         </div>
-        <p style="font-style: italic;">Label: {{ task.label }}</p>
+        <span class="badge badge-light">{{ task.label }}</span>
         <p>Notes: {{task.notes}}</p>
-        <a href="{% url 'update-task' pk=task.id %}"><span class="badge badge-dark badge-pill">Update</span></a>
-  
+        <a href="{% url 'update-task' pk=task.id %}"><button type="button" class="btn btn-outline-secondary btn-sm">Update</button>
+        </a>
+
+
       </li>
       
     </ul>
     {% endfor %} 
-
-
-
-  
-
 </ul>
 
+{% include 'task/pagination.html' %}
+
+
 </div>
+
+  
 
 
 
