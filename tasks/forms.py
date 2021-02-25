@@ -12,7 +12,8 @@ class TaskForm(forms.ModelForm):
             'title',
             'label',
             'notes',
-            'due_date'
+            'due_date',
+            'task_assigned_to'
             )
 
 class CreateAccountForm(UserCreationForm): 

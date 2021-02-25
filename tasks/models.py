@@ -7,7 +7,9 @@ from django.contrib.auth.models import User # new
 # Create your models here.
 
 class Task(models.Model):
-    task_user = models.ForeignKey(User, on_delete=models.CASCADE, default=1) # new
+    task_user = models.ForeignKey(User, on_delete=models.CASCADE, default=1) 
+    task_assigned_to = models.CharField(max_length=30,default="",blank=True)
+    task_assigned_by = models.CharField(max_length=30,default="", editable=False)
 
     title =  models.CharField(max_length=30)
     label =  models.CharField(max_length=8)

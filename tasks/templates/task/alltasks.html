@@ -4,11 +4,9 @@
 {% block content %}
 
 
-
 <div class="container" style="width:75%">
   <ul class="list-group">
     {% for task in tasks %}
-  
     <ul class="list-group">
       <li class="list-group-item">
         <div class="d-flex w-100 justify-content-between">
@@ -16,6 +14,11 @@
           <small><span style="font-weight: bold;">Date Due: </span> {{ task.due_date }}</small>
         </div>
         <span class="badge badge-light">{{ task.label }}</span>
+
+        {% if task.task_assigned_by %}
+        <small style="float:right"><span style="font-weight: bold;">Assigned By:</span> {{ task.task_assigned_by}}</small>
+        {% endif %}
+
         <p>Notes: {{task.notes}}</p>
         <a href="{% url 'update-task' pk=task.id %}"><button type="button" class="btn btn-outline-secondary btn-sm">Update</button>
         </a>
@@ -25,15 +28,13 @@
       
     </ul>
     {% endfor %} 
+  
 </ul>
 
-{% if task in tasks %}
-  {% include 'task/pagination.html' %}
-{% endif %}
+{% include 'task/pagination.html' %}
 
 
 </div>
-
   
 
 

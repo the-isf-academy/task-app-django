@@ -30,17 +30,6 @@ class CreateAccountView(FormView):
         login(self.request, user)
         return super().form_valid(form)
 
-class TaskList(ListView):
-
-    template_name = 'task/taskList.html'
-    model = Task
-    paginate_by = 3
-    context_object_name = 'tasks'
-
-    def get_queryset(self):
-        #Filters archived tasks out of main list 
-        return self.model.objects.filter(archive=False).filter(task_user=self.request.user).order_by('-due_date')
-
 
 class TaskForm(LoginRequiredMixin,FormView):
     template_name = 'task/TaskForm.html'
@@ -51,20 +40,33 @@ class TaskForm(LoginRequiredMixin,FormView):
     def form_valid(self, form):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
+
+        if form.instance.task_assigned_to != "":
+            form.instance.task_assigned_by = self.request.user.username
+        
         form.instance.task_user = self.request.user
         form.save()
         return super().form_valid(form)
 
 
-class DetailTask(DetailView):
+class AllTasks(ListView):
 
-    template_name = 'task/detailTask.html' 
+    template_name = 'task/alltasks.html' 
     model = Task
+    paginate_by = 5
+    context_object_name = 'tasks'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['now'] = timezone.now()
-        return context
+
+    def get_queryset(self):
+        #Filters archived tasks out of main list 
+        data = self.model.objects.all()
+        user_created_tasks = data.filter(archive=False).filter(task_user=self.request.user)
+        user_assigned_tasks = data.filter(archive=False).filter(task_assigned_to=self.request.user.username)
+        tasks = user_created_tasks | user_assigned_tasks
+        return tasks.distinct().order_by('-due_date') 
+
+
+
 
 class EditTask(UpdateView):
     model = Task
@@ -86,6 +88,15 @@ class ArchivedTaskList(ListView):
     # paginate_by = 12
     context_object_name = 'tasks'
 
-    def get_queryset(self):
-        #Filters archived tasks out of main list 
-        return self.model.objects.filter(archive=True).filter(task_user=self.request.user)
+    # def get_queryset(self):
+    #     #Filters archived tasks out of main list 
+    #     return self.model.objects.filter(archive=True).filter(task_user=self.request.user)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user_created_tasks = Task.objects.filter(archive=True).filter(task_user=self.request.user)
+        user_assigned_tasks = Task.objects.filter(archive=True).filter(task_assigned_to=self.request.user.username)
+        tasks = user_created_tasks | user_assigned_tasks
+        context['archived_tasks'] = tasks.distinct().order_by('-due_date') 
+
+        return context
