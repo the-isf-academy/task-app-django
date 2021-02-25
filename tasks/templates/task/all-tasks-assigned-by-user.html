@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+
+<div class="container" style="width:75%">
+  <ul class="list-group">
+    {% for task in tasks %}
+        {% include 'task/tasklist-assigned-by-user.html' %}
+
+    {% endfor %} 
+  
+</ul>
+
+{% include 'task/pagination.html' %}
+
+
+</div>
+  
+
+
+
+
+{% endblock %}
+
+
+

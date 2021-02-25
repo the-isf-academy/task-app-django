@@ -1,22 +1,13 @@
-{% extends "base.html" %}
-
-
-{% block content %}
-
-
-<div class="container" style="width:75%">
-  <ul class="list-group">
-    {% for task in tasks %}
-    <ul class="list-group">
+<ul class="list-group">
       <li class="list-group-item">
         <div class="d-flex w-100 justify-content-between">
           <h5 class="mb-1">{{ task }}</h5>
           <small><span style="font-weight: bold;">Date Due: </span> {{ task.due_date }}</small>
         </div>
-        <span class="badge badge-light">{{ task.label }}</span>
+        <span class="badge badge-secondary">{{ task.label }}</span>
 
         {% if task.task_assigned_by %}
-        <small style="float:right"><span style="font-weight: bold;">Assigned By:</span> {{ task.task_assigned_by}}</small>
+        <small style="float:right"><span style="font-weight: bold;">Assigned To:</span> {{ task.task_assigned_to}}</small>
         {% endif %}
 
         <p>Notes: {{task.notes}}</p>
@@ -27,20 +18,3 @@
       </li>
       
     </ul>
-    {% endfor %} 
-  
-</ul>
-
-{% include 'task/pagination.html' %}
-
-
-</div>
-  
-
-
-
-
-{% endblock %}
-
-
-

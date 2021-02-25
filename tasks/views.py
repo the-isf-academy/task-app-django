@@ -5,6 +5,7 @@ from django.views.generic import ListView, FormView, UpdateView, TemplateView
 from django.views.generic.detail import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, authenticate
+from django.db.models import Q
 
 
 from .models import *
@@ -34,7 +35,7 @@ class CreateAccountView(FormView):
 class TaskForm(LoginRequiredMixin,FormView):
     template_name = 'task/TaskForm.html'
     form_class = TaskForm
-    success_url = '/home'
+    success_url = '/dashboard'
 
 
     def form_valid(self, form):
@@ -49,9 +50,9 @@ class TaskForm(LoginRequiredMixin,FormView):
         return super().form_valid(form)
 
 
-class AllTasks(ListView):
+class AllUserAssignedTasks(ListView):
 
-    template_name = 'task/alltasks.html' 
+    template_name = 'task/all-tasks-for-user.html' 
     model = Task
     paginate_by = 5
     context_object_name = 'tasks'
@@ -59,19 +60,51 @@ class AllTasks(ListView):
 
     def get_queryset(self):
         #Filters archived tasks out of main list 
-        data = self.model.objects.all()
-        user_created_tasks = data.filter(archive=False).filter(task_user=self.request.user)
-        user_assigned_tasks = data.filter(archive=False).filter(task_assigned_to=self.request.user.username)
+        data = self.model.objects.all().filter(archive=False)
+        user_created_tasks = data.filter(task_user=self.request.user).filter(~Q(task_assigned_by=self.request.user.username))
+        user_assigned_tasks = data.filter(task_assigned_to=self.request.user.username)
         tasks = user_created_tasks | user_assigned_tasks
         return tasks.distinct().order_by('-due_date') 
 
+class AllTasksUserAssigned(ListView):
+
+    template_name = 'task/all-tasks-assigned-by-user.html' 
+    model = Task
+    paginate_by = 5
+    context_object_name = 'tasks'
 
 
+    def get_queryset(self):
+        #Filters archived tasks out of main list 
+        data = self.model.objects.all().filter(archive=False)
+        user_created_tasks = data.filter(task_user=self.request.user).filter(task_assigned_by=self.request.user.username)
+        return user_created_tasks.distinct().order_by('-due_date') 
+
+
+class TaskDashboard(ListView):
+    template_name = 'task/dashboard.html'
+    model = Task
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        data = self.model.objects.all().filter(archive=False)
+
+        # filter tasks for user
+        user_created_tasks = data.filter(task_user=self.request.user).filter(~Q(task_assigned_by=self.request.user.username))
+        user_assigned_tasks = data.filter(task_assigned_to=self.request.user.username)
+        tasks = user_created_tasks | user_assigned_tasks
+        context['user_tasks'] = tasks.distinct().order_by('-due_date')[0:3]
+
+        # filter tasks user assigned to other users 
+        user_created_tasks = data.filter(task_user=self.request.user).filter(task_assigned_by=self.request.user.username)
+        context['user_created_tasks'] = user_created_tasks.distinct().order_by('-due_date')[0:3]
+
+        return context
 
 class EditTask(UpdateView):
     model = Task
     template_name = 'task/updateTask.html'    
-    success_url = '/home'
+    success_url = '/dashboard'
     
     fields = [
         "title",

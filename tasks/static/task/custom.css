@@ -3,10 +3,6 @@
     color: blue;
 } */
 
-#navbar-custon{
-    background-color:rgb(73, 128, 90);
-    text-align: center;
-}
 
 body{
     color: rgb(36, 36, 36);
@@ -33,9 +29,9 @@ nav{
 
 #form-card{
     margin-bottom: 50px;
-    width: 500px;
+    width: 700px;
     /* background-color:  rgb(105, 135, 114); */
-    border-color:  rgb(105, 135, 114);
+    border-color:  #7c7e81;
     border-radius: 10px;
     border-width: 3px;
     /* color:white; */
@@ -44,7 +40,7 @@ nav{
 }
 
 #form-container{
-    width:300px;
+    width:500px;
     
 }
 
@@ -53,27 +49,3 @@ nav{
 }
 
 
-#form-container button, #task-card-container button{
-    background-color: rgb(73, 128, 90);
-    border-color: rgb(73, 128, 90);
-
-}
-
-#form-container button:hover, #task-card-container button:hover{
-    background-color: rgb(52, 91, 64);
-    border-color: rgb(52, 91, 64);
-}
-
-#task-card-container a{
-    color: rgb(73, 128, 90);
-}
-
-
- #task-card-container a:hover{
-    text-decoration: none;;
-    color: rgb(40, 74, 51);
-}
-
-.badge-pill{
-    background-color:  rgb(40, 74, 51);
-}

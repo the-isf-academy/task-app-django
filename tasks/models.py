@@ -13,7 +13,7 @@ class Task(models.Model):
 
     title =  models.CharField(max_length=30)
     label =  models.CharField(max_length=8)
-    notes = models.TextField(editable=True)
+    notes = models.TextField(editable=True, max_length=200)
 
     due_date = models.DateField('Date Due', editable=True)    
     pub_date = models.DateTimeField('Date Created',default=now, editable=False)    

@@ -1,0 +1,20 @@
+<ul class="list-group">
+    <li class="list-group-item">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">{{ task }}</h5>
+        <small><span style="font-weight: bold;">Date Due: </span> {{ task.due_date }}</small>
+      </div>
+      <span class="badge badge-secondary">{{ task.label }}</span>
+
+      {% if task.task_assigned_by %}
+      <small style="float:right"><span style="font-weight: bold;">Assigned By:</span> {{ task.task_assigned_by}}</small>
+      {% endif %}
+
+      <p>Notes: {{task.notes}}</p>
+      <a href="{% url 'update-task' pk=task.id %}"><button type="button" class="btn btn-outline-secondary btn-sm">Update</button>
+      </a>
+
+
+    </li>
+    
+  </ul>

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+
+<div class="container" style="width:75%; margin-bottom: 50px">
+    <h4>User Tasks</h4>
+    
+  <ul class="list-group">
+    {% for task in user_tasks %}
+        {% include 'task/tasklist-for-user.html' %}
+    {% endfor %} 
+
+    <a href="{% url 'all-tasks-for-user' %} " class="text-secondary" style="text-align: right">more...</a>
+  
+</ul>
+
+
+</div>
+  
+
+<div class="container" style="width:75%">
+    <h4>User Assigned Tasks</h4>
+  <ul class="list-group">
+    {% for task in user_created_tasks %}
+
+    {% include 'task/tasklist-assigned-by-user.html' %}
+
+    {% endfor %} 
+  
+    <a href="{% url 'all-tasks-assigned-by-user' %}" class="text-secondary" style="text-align: right">more...</a>
+
+</ul>
+
+
+
+</div>
+  
+
+
+
+
+{% endblock %}
+
+
+
