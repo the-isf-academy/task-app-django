@@ -33,7 +33,7 @@ class CreateAccountView(FormView):
 
 
 class TaskForm(LoginRequiredMixin,FormView):
-    template_name = 'task/TaskForm.html'
+    template_name = 'task/taskForm.html'
     form_class = TaskForm
     success_url = '/dashboard'
 
