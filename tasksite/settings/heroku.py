@@ -5,7 +5,7 @@ Production Settings for Heroku
 import environ
 
 # If using in your own project, update the project namespace below
-from lunchsite.settings.base import *
+from tasksite.settings.base import *
 
 env = environ.Env(
     # set casting, default value
