@@ -18,7 +18,7 @@ class CreateAccountView(FormView):
     template_name = 'task/createAccount.html'
     form_class = CreateAccountForm
 
-    success_url = '/home'
+    success_url = '/'
 
 
     def form_valid(self, form):
